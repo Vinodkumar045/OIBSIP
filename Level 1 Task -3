@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background: linear-gradient(to right, #1c92d2, #f2fcfe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: gradientBackground 15s ease infinite;
+          }
+          
+          
+          .container {
+            background: rgba(92, 122, 227, 0.9);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1s ease;
+          }
+          
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          
+          h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 2em;
+            animation: slideDown 1s ease;
+          }
+          
+          @keyframes slideDown {
+            from {
+              transform: translateY(-50px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+          
+          .input-group {
+            margin-bottom: 15px;
+          }
+          
+          .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+          }
+          
+          .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            transition: border-color 0.3s;
+          }
+          
+          .input-group input:focus {
+            border-color: #1c92d2;
+            outline: none;
+          }
+          
+          button {
+            width: 60%;
+            padding: 12px 20px;
+          
+            background-color: #ab70bb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+          }
+          
+          button:hover {
+            background-color: #4f5fc8;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(18, 26, 7, 0.2);
+          }
+          
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <div class="input-group">
+            <label for="celsius">Celsius</label>
+            <input type="number" id="celsius" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="number" id="fahrenheit" placeholder="32">
+        </div>
+        <div class="input-group">
+            <label for="kelvin">Kelvin</label>
+            <input type="number" id="kelvin" placeholder="273.15">
+        </div>
+        <button onclick="convert()">Convert</button>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('celsius').addEventListener('input', convert);
+document.getElementById('fahrenheit').addEventListener('input', convert);
+document.getElementById('kelvin').addEventListener('input', convert);
+
+function convert(event) {
+    const id = event.target.id;
+    const value = parseFloat(event.target.value);
+
+    if (isNaN(value)) {
+        document.getElementById('celsius').value = '';
+        document.getElementById('fahrenheit').value = '';
+        document.getElementById('kelvin').value = '';
+        return;
+    }
+
+    if (id === 'celsius') {
+        document.getElementById('fahrenheit').value = (value * 9 / 5 + 32).toFixed(2);
+        document.getElementById('kelvin').value = (value + 273.15).toFixed(2);
+    } else if (id === 'fahrenheit') {
+        document.getElementById('celsius').value = ((value - 32) * 5 / 9).toFixed(2);
+        document.getElementById('kelvin').value = ((value + 459.67) * 5 / 9).toFixed(2);
+    } else if (id === 'kelvin') {
+        document.getElementById('celsius').value = (value - 273.15).toFixed(2);
+        document.getElementById('fahrenheit').value = ((value * 9 / 5) - 459.67).toFixed(2);
+    }
+}
+
+    </script>
+</body>
+</html>
 
